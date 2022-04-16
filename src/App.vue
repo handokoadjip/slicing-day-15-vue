@@ -10,15 +10,15 @@
 <script>
 import $ from 'jquery';
 import HeaderComponent from "@/components/HeaderComponent.vue"
-import FooterComponent from "@/components/FooterComponent.vue"
 import SectionFooterComponent from "@/components/SectionFooterComponent.vue"
+import FooterComponent from "@/components/FooterComponent.vue"
 
 export default {
   name: 'App',
   components: {
     HeaderComponent,
-    FooterComponent,
     SectionFooterComponent
+    FooterComponent,
   },
   mounted: function() {
     $(document).ready(function() {
