@@ -1,26 +1,51 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HeaderComponent />
+  <main class="my-5 py-5">
+    <router-view />
+  </main>
+  <SectionFooterComponent />
+  <FooterComponent />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import $ from 'jquery';
+import HeaderComponent from "@/components/HeaderComponent.vue"
+import FooterComponent from "@/components/FooterComponent.vue"
+import SectionFooterComponent from "@/components/SectionFooterComponent.vue"
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HeaderComponent,
+    FooterComponent,
+    SectionFooterComponent
+  },
+  mounted: function() {
+    $(document).ready(function() {
+      function mobileViewUpdate() {
+        const viewportWidth = $(window).width();
+        if(viewportWidth < 600) {
+          $(".navbar.fixed-top").addClass("scrolled");
+          $(".navbar-brand").addClass("scrolled");
+        } else {
+          $(document).scroll(function() {
+            const nav = $(".navbar.fixed-top");
+            const brand = $(".navbar-brand");
+            nav.toggleClass("scrolled", $(this).scrollTop() > nav.height());
+            brand.toggleClass("scrolled", $(this).scrollTop() > nav.height());
+          });
+        }
+      }
+
+      $(window).on("load", mobileViewUpdate);
+      $(window).on("resize", mobileViewUpdate);
+
+      mobileViewUpdate();
+    });
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+/* Style Here */
 </style>
